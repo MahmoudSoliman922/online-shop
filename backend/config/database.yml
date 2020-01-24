@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgis
+  encoding: unicode
+  pool: <%= ENV['RAILS_MAX_THREADS'] %>
+  host: <%= ENV['DB_HOST'] %>
+  port: <%= ENV['DB_PORT'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: rails_backend_development
+
+test:
+  <<: *default
+  database: rails_backend_test
+
+production:
+  <<: *default
+  database: rails_backend_production
