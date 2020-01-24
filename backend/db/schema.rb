@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_24_130404) do
+ActiveRecord::Schema.define(version: 2020_01_24_202243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -49,4 +49,17 @@ ActiveRecord::Schema.define(version: 2020_01_24_130404) do
     t.datetime "updated_at", null: false
   end
 
+
+  create_view "offers", sql_definition: <<-SQL
+      SELECT d.name AS departement_name,
+      prod.name AS product_name,
+      prod.price AS product_price,
+      prom.code AS promotion_code,
+      prom.active AS promotion_active,
+      prom.discount AS promotion_discount
+     FROM (((products prod
+       JOIN departements d ON ((prod.departement_id = d.id)))
+       JOIN product_promotions prod_prom ON ((prod_prom.product_id = prod.id)))
+       JOIN promotions prom ON ((prod_prom.promotion_id = prom.id)));
+  SQL
 end
