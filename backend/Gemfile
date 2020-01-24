@@ -12,7 +12,7 @@ gem 'activerecord-postgis-adapter'
 gem 'rgeo'
 gem 'rgeo-activerecord'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.12'
 gem 'puma_worker_killer' # To relate : https://devcenter.heroku.com/articles/ruby-memory-use
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
