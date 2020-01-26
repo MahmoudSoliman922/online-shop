@@ -4,7 +4,7 @@ import OffersComponent from './components/offers/offers_component';
 
 function App() {
   return (
-    <div className='App'>
+    <div>
       <OffersComponent />
     </div>
   );

@@ -9,7 +9,6 @@ class OfferExecuter
   end
 
   def index
-
     @response[:offers] = get_serlized_array(@model.all)
     self
   rescue StandardError => e

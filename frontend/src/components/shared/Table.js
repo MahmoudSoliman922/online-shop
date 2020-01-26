@@ -32,7 +32,8 @@ export default class Table extends React.Component {
           serverSide: false,
           viewColumns: false,
           print: false,
-          download: false
+          download: false,
+          selectableRows: "none"
         }
       });
     });
