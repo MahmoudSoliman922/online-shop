@@ -4,11 +4,12 @@ class OfferExecuter
     @model = Offer
     @serializer = OffersSerializer
 
-    @response = []
+    @response = {}
     @errors = []
   end
 
   def index
+
     @response[:offers] = get_serlized_array(@model.all)
     self
   rescue StandardError => e
@@ -17,10 +18,10 @@ class OfferExecuter
 
   def paginated(page= 1)
     page ||= 1
-    @response = {}
-    paginatedOffers = Offer.limit(25).offset((page.to_i-1) * 25)
+    paginatedOffers = Offer.limit(15).offset((page.to_i-1) * 15)
     @response[:offers] = get_serlized_array(paginatedOffers)
     @response[:page] = page
+    @response[:total] = Offer.count
     self
   rescue StandardError => e
     @errors << e
@@ -28,7 +29,6 @@ class OfferExecuter
 
   def filter(validation, filters, page = 1)
     page ||= 1
-    @response = {}
     valid_data = validation.validate
     (@errors.concat valid_data.instance_variable_get(:@errors)) && (return self) unless valid_data.instance_variable_get(:@errors).blank?
 
@@ -39,7 +39,8 @@ class OfferExecuter
         filteredOffers = @model.departement(filters['departement']) unless filters['departement'].blank?
         filteredOffers = filteredOffers.promotion_status(filters['promotion_active']) unless filters['promotion_active'].blank?
       end
-      filteredOffers = filteredOffers.limit(25).offset((page.to_i-1) * 25) unless filteredOffers.blank?
+      @response[:total] = Offer.filteredOffers
+      filteredOffers = filteredOffers.limit(15).offset((page.to_i-1) * 15) unless filteredOffers.blank?
       @response[:offers] = get_serlized_array(filteredOffers)
       @response[:page] = page
     rescue StandardError => e
