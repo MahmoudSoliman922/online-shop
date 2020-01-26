@@ -4,9 +4,25 @@ import { getAllOffers, getPaginatedOffers, getFilteredOffers } from './offers_re
 
 class OffersComponent extends Component {
   state = {
-    serverSidePagination: false,
-    filters: [[], [], [], [], [], []]
+    departement: [],
+    serverSidePagination: false
   };
+
+  convertDepartements = offers => {
+    return offers.map(offer => {
+      return offer.departement_name;
+    });
+  };
+
+  componentDidMount(){
+    getAllOffers().then(res => {
+      let departements = this.convertDepartements(res.data.response.offers)
+      this.setState({
+        ...this.state,
+        departement: departements
+      })
+    })
+  }
 
   switchToServerSidePagination = () => {
     this.setState({
@@ -24,15 +40,14 @@ class OffersComponent extends Component {
           filter: true,
           sort: true,
           searchable: false,
-          filterList: this.state.filters[0]
+          filterOptions: { names: this.state.departement }
         }
       },
       {
         name: 'product_name',
         label: 'Product Name',
         options: {
-          filter: false,
-          filterList: this.state.filters[1]
+          filter: false
         }
       },
       {
@@ -40,8 +55,7 @@ class OffersComponent extends Component {
         label: 'Product Price',
         options: {
           filter: false,
-          searchable: false,
-          filterList: this.state.filters[2]
+          searchable: false
         }
       },
       {
@@ -49,8 +63,7 @@ class OffersComponent extends Component {
         label: 'Promotion Code',
         options: {
           searchable: false,
-          filter: false,
-          filterList: this.state.filters[3]
+          filter: false
         }
       },
       {
@@ -62,7 +75,6 @@ class OffersComponent extends Component {
           filterOptions: {
             names: [true, false]
           },
-          filterList: this.state.filters[4],
           customBodyRender: (value, tableMeta, updateValue) => {
             return <p>{value.toString()}</p>;
           }
@@ -73,31 +85,33 @@ class OffersComponent extends Component {
         label: 'Promotion Discount',
         options: {
           filter: false,
-          searchable: false,
-          filterList: this.state.filters[5]
+          searchable: false
         }
       }
     ];
     return (
       <div className='content-wrapper' style={{ minHeight: '960.3px' }}>
-        <div>
-          TABLE SHOULD BE HERE!
-          <button
-            onClick={() => {
-              this.switchToServerSidePagination();
-            }}
-          >
-            SWITCH TO SERVERSIDE
-          </button>
-          <Table
-            columns={columns}
-            data={this.state.data}
-            serverSide={this.state.serverSidePagination}
-            getAll={getAllOffers}
-            getPaginated={getPaginatedOffers}
-            getFiltered={getFilteredOffers}
-          />
-        </div>
+          {
+              this.state.departement.length !== 0 &&
+              <div>
+              TABLE SHOULD BE HERE!
+              <button
+                onClick={() => {
+                  this.switchToServerSidePagination();
+                }}
+              >
+                SWITCH TO SERVERSIDE
+              </button>
+              <Table
+                columns={columns}
+                data={this.state.data}
+                serverSide={this.state.serverSidePagination}
+                getAll={getAllOffers}
+                getPaginated={getPaginatedOffers}
+                getFiltered={getFilteredOffers}
+              />
+            </div>
+          }
       </div>
     );
   }

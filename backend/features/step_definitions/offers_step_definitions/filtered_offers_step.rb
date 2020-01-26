@@ -1,4 +1,9 @@
 # frozen_string_literal: true
+require 'factory_bot'
+
+Given('departement with name {string} is created') do |name|
+  FactoryBot.create(:departement, name: name)
+end
 
 When('user request to get filtered offers in departement {string}') do |departement|
   headers = {

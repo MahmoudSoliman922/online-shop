@@ -1,5 +1,4 @@
 import React from 'react';
-import { CircularProgress, Typography } from '@material-ui/core';
 import MUIDataTable from 'mui-datatables';
 
 export default class Table extends React.Component {
@@ -11,6 +10,7 @@ export default class Table extends React.Component {
     columns: [],
     filter: false,
     serverSideFilterList: [],
+    filters: [[], [], [], [], []],
     serverSide: false,
     options: {}
   };
@@ -64,9 +64,18 @@ export default class Table extends React.Component {
               print: false,
               download: false,
               onFilterChange: (column, filterList, type) => {
-                if (type === 'chip') {
-                  console.log('updating filters via chip');
-                  this.handleFilterSubmit(filterList)();
+                if (type === 'reset') {
+                  this.props.getPaginated(1).then(res => {
+                    this.setState({
+                      ...this.state,
+                      isLoading: false,
+                      page: res.data.response.page,
+                      data: res.data.response.offers,
+                      serverSide: this.props.serverSide,
+                      columns: this.props.columns,
+                      count: res.data.response.total
+                    });
+                  });
                 }
               },
               customFilterDialogFooter: filterList => {
@@ -115,20 +124,21 @@ export default class Table extends React.Component {
   }
 
   handleFilterSubmit = filterList => () => {
-    console.log('Submitting filters: ', filterList);
+    let filters = {
+      departement: filterList[0][0],
+      promotion_active: filterList[4][0]
+    };
+    this.setState({ isLoading: true, filters: filterList });
 
-    // this.setState({ isLoading: true, filters: filterList });
-
-    // console.log(this.props);
-    // this.props.getFiltered(filterList).then(res => {
-    //   this.setState({
-    //     isLoading: false,
-    //     data: res.data.response.offers,
-    //     serverSideFilterList: filterList,
-    //     columns: this.props.columns,
-    //     count: res.data.response.total
-    //   });
-    // });
+    this.props.getFiltered(filters).then(res => {
+      this.setState({
+        isLoading: false,
+        data: res.data.response.offers,
+        serverSideFilterList: filterList,
+        columns: this.props.columns,
+        count: res.data.response.total
+      });
+    });
   };
 
   changePage = page => {
@@ -150,12 +160,6 @@ export default class Table extends React.Component {
     return (
       <div>
         <MUIDataTable
-          title={
-            <Typography variant='h3'>
-              {/* {this.props.tableTitle} */}
-              {this.state.isLoading && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}
-            </Typography>
-          }
           data={this.state.data}
           columns={this.state.columns}
           options={this.state.options}

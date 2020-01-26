@@ -8,10 +8,11 @@ Feature: in this feature file, offers sceniaros is covered
     When user request to get paginated offers in page "2"
     Then successful json response returned to the user
     And response returned to the user with page "2"
-    And response returned to the user with "25" records
+    And response returned to the user with "15" records
 
   Scenario: Get filter offers with departement.
-    When user request to get filtered offers in departement "Mikel Mayer"
+    # Given departement with name "Trufla" is created
+    When user request to get filtered offers in departement "Trufla"
     Then successful json response returned to the user
     And response returned to the user with page "1"
     And response returned to the user with "1" records
@@ -20,7 +21,7 @@ Feature: in this feature file, offers sceniaros is covered
     When user request to get filtered offers in promotion_active "true"
     Then successful json response returned to the user
     And response returned to the user with page "1"
-    And response returned to the user with "25" records
+    And response returned to the user with "15" records
 
   Scenario: Get filter offers with promotion_active.
     When user request to get filtered offers in promotion_active "notaboolean"
