@@ -8,13 +8,18 @@
 - Rspec (for unit tests)
 - React styled components (for stylings)
 
-# Setup && running the application
+# Setup
 
 Before you run the application for the first time, you must:
 
 - Install docker and docker-compose, Check those links:
+  <br>
   1- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+  <br>
+
   2- https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+
+# Running Application
 
 Then start the project with :
 
@@ -25,6 +30,8 @@ docker-compose up --build
 - note that if you don't configure docker to be used without sudo you will have to run it with sudo.
 
 After the building finish, go to `localhost:3000` and you'll find it up and running (without dta)
+
+# Adding Data
 
 - Run seeds
 
@@ -38,9 +45,12 @@ rails db:seed
 
 After running seeds you should be able to see the data on `localhost:3000` after refreshing it.
 
+# Running tests
+
 - Run tests
   You should run the tests with (make sure that the project is up and running before running those commands) :
-  <h3>Integration tests</h3>
+
+<h3>Integration tests</h3>
 
 ```
 docker-compose exec backend bash
@@ -49,8 +59,9 @@ cucumber
 ```
 
 <h3>Unit tests</h3>
+
 ```
 docker-compose exec backend bash
 cd backend
-rspec 
+rspec
 ```
