@@ -13,7 +13,7 @@ const GlobalStyles = createGlobalStyle`
 
 class OffersComponent extends Component {
   state = {
-    departement: [],
+    departement: undefined,
     serverSidePagination: false
   };
 
@@ -102,7 +102,7 @@ class OffersComponent extends Component {
     return (
       <Fragment>
         <GlobalStyles />
-        {this.state.departement.length !== 0 && (
+        {this.state.departement !== undefined && (
           <ThemeProvider theme={theme}>
             <HeaderDiv>
               <ButtonDiv>
