@@ -1,14 +1,11 @@
 FROM node:latest
-WORKDIR /usr/src/frontend-app
-RUN rm -rf node_module
-RUN rm -rf package-lock.json
-RUN rm -rf yarn-lock.json
+
+RUN mkdir /frontend
+WORKDIR /frontend
+
 COPY package.json ./
-RUN npm uninstall -g yarn
-RUN npm cache clean -f
-
+RUN rm -rf node_modules
+RUN rm -rf package-lock.json
 RUN npm install
-COPY . .
-EXPOSE 3000
 
-CMD ["npm", "start"]
+ADD . /frontend

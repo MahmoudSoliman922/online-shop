@@ -30,7 +30,6 @@ services:
       - backend
     command: npm start
     volumes:
-      - ./frontend/:/usr/src/frontend-app
-      - ./frontend/node_modules:/usr/src/frontend-app/node_modules
+      - ./frontend/
     ports:
       - "3000:3000"
