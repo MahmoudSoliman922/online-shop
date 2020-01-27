@@ -2,7 +2,6 @@ version: '2'
 
 services:
   db:
-    container_name: postgis-db
     image: mdillon/postgis:latest
     restart: always
     env_file:
