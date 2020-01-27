@@ -102,41 +102,39 @@ class OffersComponent extends Component {
     return (
       <Fragment>
         <GlobalStyles />
-        {this.state.departement !== undefined && (
-          <ThemeProvider theme={theme}>
-            <HeaderDiv>
-              <ButtonDiv>
-                <Button
-                  onClick={() => {
-                    this.switchToServerSidePagination();
-                  }}
-                >
-                  Switch
-                </Button>
-              </ButtonDiv>
-              <DotDiv>
-                <Dot />
-              </DotDiv>
-            </HeaderDiv>
-            <TableDiv>
-              <Table
-                columns={columns}
-                data={this.state.data}
-                serverSide={this.state.serverSidePagination}
-                getAll={getAllOffers}
-                getPaginated={getPaginatedOffers}
-                getFiltered={getFilteredOffers}
-              />
-            </TableDiv>
-            <ExplainationDiv>
-              <Label>You should</Label>
-              <br />
-              <Click>click</Click>
-              <br />
-              <Label>on the switch button to activate the server side pagination and filter</Label>
-            </ExplainationDiv>
-          </ThemeProvider>
-        )}
+        <ThemeProvider theme={theme}>
+          <HeaderDiv>
+            <ButtonDiv>
+              <Button
+                onClick={() => {
+                  this.switchToServerSidePagination();
+                }}
+              >
+                Switch
+              </Button>
+            </ButtonDiv>
+            <DotDiv>
+              <Dot />
+            </DotDiv>
+          </HeaderDiv>
+          <TableDiv>
+            <Table
+              columns={columns}
+              data={this.state.data}
+              serverSide={this.state.serverSidePagination}
+              getAll={getAllOffers}
+              getPaginated={getPaginatedOffers}
+              getFiltered={getFilteredOffers}
+            />
+          </TableDiv>
+          <ExplainationDiv>
+            <Label>You should</Label>
+            <br />
+            <Click>click</Click>
+            <br />
+            <Label>on the switch button to activate the server side pagination and filter</Label>
+          </ExplainationDiv>
+        </ThemeProvider>
       </Fragment>
     );
   }
