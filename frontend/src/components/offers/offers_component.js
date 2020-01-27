@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Table from '../shared/Table';
 import { getAllOffers, getPaginatedOffers, getFilteredOffers } from './offers_requests';
 import { TableDiv, ExplainationDiv, HeaderDiv, Label, Click, Dot, Button, DotDiv, ButtonDiv, theme } from './offers_styles';
