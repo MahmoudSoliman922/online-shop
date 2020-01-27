@@ -20338,3 +20338,25 @@ Processing by Api::V1::OffersController#index as HTML
 Completed 200 OK in 34ms (Views: 33.2ms | ActiveRecord: 0.9ms)
 
 
+Started GET "/api/v1/offers" for 192.168.144.1 at 2020-01-27 02:10:08 +0000
+Cannot render console from 192.168.144.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Api::V1::OffersController#index as HTML
+  Parameters: {"offer"=>{}}
+[active_model_serializers]   [1m[36mOffer Load (1.9ms)[0m  [1m[34mSELECT "offers".* FROM "offers"[0m
+[active_model_serializers]   ↳ app/controllers/application_controller.rb:5
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (15.85ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (34.2ms)
+Completed 200 OK in 35ms (Views: 33.1ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/api/v1/offers" for 192.168.144.1 at 2020-01-27 02:10:08 +0000
+Cannot render console from 192.168.144.1! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by Api::V1::OffersController#index as HTML
+  Parameters: {"offer"=>{}}
+[active_model_serializers]   [1m[36mOffer Load (1.3ms)[0m  [1m[34mSELECT "offers".* FROM "offers"[0m
+[active_model_serializers]   ↳ app/controllers/application_controller.rb:5
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (35.79ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (49.15ms)
+Completed 200 OK in 50ms (Views: 48.4ms | ActiveRecord: 1.3ms)
+
+
