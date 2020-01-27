@@ -1,6 +1,0 @@
-.git
-.idea
-node_modules
-build
-npm-debug.log*
-npm-error.log*
