@@ -28,7 +28,7 @@ services:
       context: ./frontend/
     depends_on:
       - backend
-    command: yarn start
+    command: npm start
     volumes:
       - ./frontend/:/usr/src/frontend-app
       - ./frontend/node_modules:/usr/src/frontend-app/node_modules
