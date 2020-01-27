@@ -65,3 +65,9 @@ docker-compose exec backend bash
 cd backend
 rspec
 ```
+
+# Backend APIs
+
+- You can find the Backend APIs in the link below: 
+<br>
+https://documenter.getpostman.com/view/4628217/SWTA9dFh?version=latest
