@@ -1,8 +1,8 @@
 FROM node:latest
 WORKDIR /usr/src/frontend-app
-RUN rm -R node_module
-RUN rm -R package-lock.json
-RUN rm -R yarn-lock.json
+RUN rm -rf node_module
+RUN rm -rf package-lock.json
+RUN rm -rf yarn-lock.json
 COPY package.json ./
 RUN npm uninstall -g yarn
 RUN npm cache clean -f
